@@ -15,7 +15,7 @@ transactions_bp = Blueprint('transactions', __name__)
 def get_transactions():
     """
     Get all transactions
-    :return:
+    :return: transactions
     """
     transactions = Transaction.query.limit(1000).all()
 
@@ -44,7 +44,7 @@ def get_transactions():
 def total_sales_per_product():
     """
     Get total sales per product
-    :return:
+    :return: list of total sales per product
     """
     result = calculate_total_sales()
 
@@ -53,6 +53,10 @@ def total_sales_per_product():
 # API endpoint to get average unit price per product
 @transactions_bp.route('/average_unit_price', methods=['GET'])
 def average_unit_price_per_product():
+    """
+    Get average unit prices per product
+    :return: list of the average unit price per product
+    """
     result = avg_unit_price_per_product()
 
     return jsonify(result)
@@ -61,6 +65,10 @@ def average_unit_price_per_product():
 
 @transactions_bp.route('/top_products_chart', methods=['GET'])
 def top_products_chart():
+    """
+    Get top products chart
+    :return: top products chart
+    """
     # Fetch data for top 10 products by total sales
     top_products = calculate_total_sales()  # Using the function to get top products
 
@@ -84,6 +92,10 @@ def top_products_chart():
 
 @transactions_bp.route('/avg_unit_price_chart', methods=['GET'])
 def avg_unit_price_chart():
+    """
+    Get average price of unit price
+    :return: price chart with average price
+    """
     # Fetch data for average unit price per product
     avg_unit_prices = avg_unit_price_per_product()  # Using the function to get average unit prices
 

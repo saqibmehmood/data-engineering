@@ -6,7 +6,7 @@ from app import db
 def calculate_total_sales():
     """
     Calculates the total
-    :return:
+    :return: list of total sales per product
     """
     total_sales = db.session.query(
         Transaction.stockcode,
@@ -21,8 +21,8 @@ def calculate_total_sales():
 
 def avg_unit_price_per_product():
     """
-    Calculates the average unit
-    :return:
+    Calculates the average unit per product
+    :return: list of the average unit price per product
     """
     avg_prices = db.session.query(
         Transaction.stockcode,

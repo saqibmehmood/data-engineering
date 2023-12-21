@@ -13,7 +13,10 @@ transactions_bp = Blueprint('transactions', __name__)
 
 @transactions_bp.route('/transactions', methods=['GET'])
 def get_transactions():
-    # Fetch transactions from the database
+    """
+    Get all transactions
+    :return:
+    """
     transactions = Transaction.query.limit(1000).all()
 
     # Convert transactions to dictionary format
@@ -39,6 +42,10 @@ def get_transactions():
 # API endpoint to get total sales per product
 @transactions_bp.route('/total_sales', methods=['GET'])
 def total_sales_per_product():
+    """
+    Get total sales per product
+    :return:
+    """
     result = calculate_total_sales()
 
     return jsonify(result)

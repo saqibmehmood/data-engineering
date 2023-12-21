@@ -14,7 +14,7 @@ transactions_bp = Blueprint('transactions', __name__)
 @transactions_bp.route('/transactions', methods=['GET'])
 def get_transactions():
     # Fetch transactions from the database
-    transactions = Transaction.query.limit(100).all()
+    transactions = Transaction.query.limit(1000).all()
 
     # Convert transactions to dictionary format
     transactions_list = []

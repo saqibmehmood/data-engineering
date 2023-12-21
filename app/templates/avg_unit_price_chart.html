@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Average Unit Price Trend</title>
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Average Unit Price Trend</h1>
+
+    <!-- Display the chart -->
+    <div id="avg-unit-price-chart">
+        <!-- This is where the chart will be rendered -->
+    </div>
+
+    <script>
+        // Extract chart div from Flask template variable
+        var chartDiv = '{{ chart_div | safe }}';
+
+        // Create a new div element to hold the Plotly chart
+        var newDiv = document.createElement('div');
+        newDiv.innerHTML = chartDiv;
+
+        // Append the Plotly chart to the chart div
+        document.getElementById('avg-unit-price-chart').appendChild(newDiv);
+    </script>
+</body>
+</html>

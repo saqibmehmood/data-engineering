@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Top 10 Products by Total Sales</title>
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <h1>Top 10 Products by Total Sales</h1>
+
+    <!-- Div to render the Plotly chart -->
+    <div id="top-products-chart">
+        {{ chart_div | safe }} <!-- Render the Plotly chart here -->
+    </div>
+</body>
+
+</html>

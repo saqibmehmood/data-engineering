@@ -14,16 +14,8 @@
         <!-- This is where the chart will be rendered -->
     </div>
 
-    <script>
-        // Extract chart div from Flask template variable
-        var chartDiv = '{{ chart_div | safe }}';
-
-        // Create a new div element to hold the Plotly chart
-        var newDiv = document.createElement('div');
-        newDiv.innerHTML = chartDiv;
-
-        // Append the Plotly chart to the chart div
-        document.getElementById('avg-unit-price-chart').appendChild(newDiv);
-    </script>
+    {% block content %}
+        {{ chart_div | safe }}
+    {% endblock %}
 </body>
 </html>

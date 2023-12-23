@@ -9,6 +9,10 @@ from .utils.helpers import calculate_total_sales, avg_unit_price_per_product
 # Blueprint for routes
 transactions_bp = Blueprint('transactions', __name__)
 
+@transactions_bp.errorhandler(500)
+def internal_server_error(error):
+    return render_template('something went wrong.html'), 500
+
 # API endpoint to fetch transactions
 
 @transactions_bp.route('/transactions', methods=['GET'])

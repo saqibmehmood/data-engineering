@@ -1,6 +1,11 @@
 import unittest
+import sqlite3
 import requests
+from sqlalchemy.testing import db
+
 from app import create_app
+from unittest.mock import patch
+from app.models import Transaction
 
 
 class TestApp(unittest.TestCase):
@@ -42,8 +47,10 @@ class TestApp(unittest.TestCase):
                 self.assertIn('avg_unit_price', item)
 
 
+
 if __name__ == '__main__':
     unittest.main()
+
 
 
 

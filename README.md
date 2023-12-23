@@ -44,6 +44,11 @@ This application includes SQL analytics, data processing with Python, web report
     ```bash
     python app.py
     ```
+5. To run the application using Docker, execute the following command:
+    ```bash
+    docker-compose up -d
+    ```
+
 
 ## Endpoints
 
@@ -67,15 +72,13 @@ This application includes SQL analytics, data processing with Python, web report
 
 - **Description**: Displays the average unit price chart in HTML format.
 
-### `/swagger`
 
-- **Description**: Swagger documentation for the available endpoints.
 
 ## Testing
 
 The project includes unit tests for the APIs. To run the tests, use the following command:
 ```bash
-python tests.py
+python -m unittest tests
 ```
 
 ## Dockerization
@@ -83,4 +86,12 @@ python tests.py
 This application can be containerized using Docker. Use the `Dockerfile` and `docker-compose.yml` provided.
 
 ---
+
+## .env Configuration
+
+For configuring environment variables, copy the `.env.example` file and modify the values as needed:
+
+```bash
+cp .env.example .env
+
 

@@ -49,9 +49,6 @@ def test_calculate_total_sales(client):
 
         # Verify the response status code
         assert response.status_code == 200
-        print("###################################################")
-        print("data: ", actual_results)
-        print("###################################################")
         # Compare actual results with expected results
         # This comparison assumes that the order and structure of the results are consistent
         assert len(actual_results) == len(expected_results)

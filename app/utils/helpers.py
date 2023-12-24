@@ -5,17 +5,15 @@ from app import db
 
 def calculate_total_sales():
     """
-    Calculates the total
-    :return: list of total sales per product
+    Calculates the total sales per stockcode
+    :return: list of total sales per stockcode
     """
     total_sales = db.session.query(
         Transaction.stockcode,
-        Transaction.description,
         func.sum(Transaction.quantity).label('total_quantity')
-    ).group_by(Transaction.stockcode, Transaction.description).all()
+    ).group_by(Transaction.stockcode).all()
 
-    result = [{'stockcode': item[0], 'description': item[1], 'total_quantity': item[2]} for item in total_sales]
-
+    result = [{'stockcode': item[0], 'total_quantity': item[1]} for item in total_sales]
     return result
 
 
@@ -26,10 +24,9 @@ def avg_unit_price_per_product():
     """
     avg_prices = db.session.query(
         Transaction.stockcode,
-        Transaction.description,
         func.avg(Transaction.unitprice).label('avg_unit_price')
-    ).group_by(Transaction.stockcode, Transaction.description).all()
+    ).group_by(Transaction.stockcode).all()
 
-    result = [{'stockcode': item[0], 'description': item[1], 'avg_unit_price': item[2]} for item in avg_prices]
+    result = [{'stockcode': item[0], 'avg_unit_price': item[1]} for item in avg_prices]
 
     return result

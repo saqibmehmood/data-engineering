@@ -1,8 +1,7 @@
 import pytest
 from app import create_app
 from app.models import Transaction, db
-from datetime import datetime
-
+from app.utils.constants import INVOICE_DATA, TEST_COUNTRY
 
 
 @pytest.fixture
@@ -25,25 +24,23 @@ def client():
 def test_calculate_total_sales(client):
     print("1")
     # Test date and country values
-    test_invoice_date = datetime.strptime('2021-01-01 10:00:00', '%Y-%m-%d %H:%M:%S')
-    test_country = 'Testland'
 
     # Add test data to the in-memory database
     with client.application.app_context():
         db.session.add(Transaction(
             invoiceno='10001', stockcode='12345', description='Test Product A', quantity=10,
-            invoicedate=test_invoice_date, unitprice=20.00, customerid=1, country=test_country))
+            invoicedate=INVOICE_DATA, unitprice=20.00, customerid=1, country=TEST_COUNTRY))
         db.session.add(Transaction(
             invoiceno='10002', stockcode='12345', description='Test Product A', quantity=5,
-            invoicedate=test_invoice_date, unitprice=20.00, customerid=1, country=test_country))
+            invoicedate=INVOICE_DATA, unitprice=20.00, customerid=1, country=TEST_COUNTRY))
         db.session.add(Transaction(
             invoiceno='10003', stockcode='67890', description='Test Product B', quantity=3,
-            invoicedate=test_invoice_date, unitprice=35.00, customerid=2, country=test_country))
+            invoicedate=INVOICE_DATA, unitprice=35.00, customerid=2, country=TEST_COUNTRY))
         db.session.commit()
         # Define the expected results
         expected_results = [
-            {'stockcode': '12345', 'description': 'Test Product A', 'total_quantity': 15},
-            {'stockcode': '67890', 'description': 'Test Product B', 'total_quantity': 3}
+            {'stockcode': '12345', 'total_quantity': 15},
+            {'stockcode': '67890', 'total_quantity': 3}
         ]
 
         # Call the API
@@ -61,8 +58,40 @@ def test_calculate_total_sales(client):
         for expected, actual in zip(sorted(expected_results, key=lambda x: x['stockcode']),
                                     sorted(actual_results, key=lambda x: x['stockcode'])):
             assert expected['stockcode'] == actual['stockcode']
-            assert expected['description'] == actual['description']
             assert expected['total_quantity'] == actual['total_quantity']
+
+
+def test_average_unit_price_per_product(client):
+    # Populate the database with test data
+    with client.application.app_context():
+        db.session.add_all([
+            Transaction(stockcode='123', unitprice=10, invoiceno='10001', description='Test Product A', quantity=10,
+            invoicedate=INVOICE_DATA, customerid=1, country=TEST_COUNTRY),
+            Transaction(stockcode='123', unitprice=20, invoiceno='10001', description='Test Product A', quantity=10,
+            invoicedate=INVOICE_DATA, customerid=1, country=TEST_COUNTRY),
+            Transaction(stockcode='456', unitprice=30, invoiceno='10001', description='Test Product B', quantity=10,
+            invoicedate=INVOICE_DATA, customerid=1, country=TEST_COUNTRY),
+            Transaction(stockcode='456', unitprice=40, invoiceno='10001', description='Test Product C', quantity=10,
+            invoicedate=INVOICE_DATA, customerid=1, country=TEST_COUNTRY)
+        ])
+        db.session.commit()
+
+    # Call the API
+    response = client.get('/average_unit_price')
+    assert response.status_code == 200
+    data = response.get_json()
+
+    # Define expected results
+    expected_avg_prices = {
+        '123': 15.0,  # Average of 10 and 20
+        '456': 35.0   # Average of 30 and 40
+    }
+
+    # Assert the response matches the expected results
+    assert isinstance(data, list)
+    for item in data:
+        assert item['stockcode'] in expected_avg_prices
+        assert abs(item['avg_unit_price'] - expected_avg_prices[item['stockcode']]) < 0.01  # Allowing small rounding differences
 
 @pytest.fixture
 def client_actual_db():
@@ -83,7 +112,6 @@ def test_avg_unit_price(client_actual_db):
     for item in data:
         assert isinstance(item, dict)
         assert 'stockcode' in item
-        assert 'description' in item
         assert 'avg_unit_price' in item
 
 
@@ -98,7 +126,6 @@ def test_top_products(client_actual_db):
     for item in data:
         assert isinstance(item, dict)
         assert 'stockcode' in item
-        assert 'description' in item
         assert 'total_quantity' in item
 
 

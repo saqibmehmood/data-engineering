@@ -14,6 +14,7 @@ This application includes SQL analytics, data processing with Python, web report
 - Flask
 - Plotly
 - Flask-SQLAlchemy
+- Pytest
 
 ## Installation
 

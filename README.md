@@ -24,7 +24,7 @@ This application includes SQL analytics, data processing with Python, web report
     ```
 
 
-2. Create a `.env` file in the root directory and add the necessary environment variables:
+2. Update the `.env` file with required configurations:
     ```bash
     DB_USERNAME=<your-username>
     DB_PASSWORD=<your-password>
@@ -102,13 +102,15 @@ ADD COLUMN id SERIAL PRIMARY KEY;
     ```bash
     python app.py
     ```
-5. To run the application using Docker, execute the following command:
-    ```bash
-    docker-compose up -d
-    ```
+
 
 
 ## Endpoints
+
+### `/`
+- **Description**: Home page containing the links of graphs.
+- **Method**: GET
+
 
 ### `/top_products_chart`
 

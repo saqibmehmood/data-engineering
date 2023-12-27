@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 from .models import db, Transaction
 import plotly.graph_objs as go
-from flask import render_template
+from flask import render_template, request
 from sqlalchemy import func
 
 from .utils.helpers import calculate_total_sales, avg_unit_price_per_product
@@ -70,7 +70,8 @@ def index():
     """
     home page
     """
-    return render_template('index.html')
+    host_url = request.host_url
+    return render_template('index.html', host_url=host_url)
 
 
 @transactions_bp.route('/top_products_chart', methods=['GET'])

@@ -5,7 +5,7 @@ import requests
 import zipfile
 from io import BytesIO
 import openpyxl
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, select, func
 from sqlalchemy.exc import SQLAlchemyError
 from app.utils.constants import DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME
 

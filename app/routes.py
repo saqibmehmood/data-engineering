@@ -4,7 +4,7 @@ import plotly.graph_objs as go
 from flask import render_template, request
 from sqlalchemy import func
 
-from .utils.helpers import calculate_total_sales, avg_unit_price_per_product
+from .utils.helpers import calculate_total_sales, avg_unit_price_per_product, avg_unit_price_per_product_overtime
 
 # Blueprint for routes
 transactions_bp = Blueprint('transactions', __name__)
@@ -100,7 +100,6 @@ def top_products_chart():
 
     return render_template('top_products_chart.html', chart_div=chart_div)
 
-
 @transactions_bp.route('/avg_unit_price_chart', methods=['GET'])
 def avg_unit_price_chart():
     """
@@ -126,3 +125,29 @@ def avg_unit_price_chart():
     chart_div = fig.to_html(full_html=False)
 
     return render_template('avg_unit_price_chart.html', chart_div=chart_div)
+
+@transactions_bp.route('/avg_unit_price_chart_overtime', methods=['GET'])
+def avg_unit_price_chart_overtime():
+    """
+    Get average price of unit price over time
+    :return: price chart with average price over time
+    """
+    # Fetch data for average unit price per product over time
+    avg_unit_prices = avg_unit_price_per_product_overtime()
+
+    # Sort the products by average unit price
+    avg_unit_prices = sorted(avg_unit_prices, key=lambda x: x['date'], reverse=True)
+
+    # Extract dates and average unit prices
+    dates = [product['date'] for product in avg_unit_prices]
+    avg_prices = [product['avg_unit_price'] for product in avg_unit_prices]
+
+    # Create a Plotly line chart
+    data = [go.Scatter(x=dates, y=avg_prices, mode='lines+markers')]
+    layout = go.Layout(title='Average Unit Price Over Time')
+    fig = go.Figure(data=data, layout=layout)
+
+    # Convert Plotly figure to HTML
+    chart_div = fig.to_html(full_html=False)
+
+    return render_template('avg_unit_price_chart_overtime.html', chart_div=chart_div)

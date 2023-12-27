@@ -56,7 +56,7 @@ docker-compose up --build
 ```
 If you need to run the project manually(without docker) you can follow the below given steps
     
-3. Set up a virtual environment and install dependencies:
+1. Set up a virtual environment and install dependencies:
     ```bash
     python -m venv venv
     source venv/bin/activate  # for Linux/Mac
@@ -99,7 +99,7 @@ ADD COLUMN id SERIAL PRIMARY KEY;
 
 ```
 
-4. Start the application:
+2. Start the application:
     ```bash
     python app.py
     ```
@@ -113,23 +113,32 @@ ADD COLUMN id SERIAL PRIMARY KEY;
 - **Method**: GET
 
 
+### `/total_sales`
+
+- **Description**: Displays the top 10 products by total sales.
+- **Method**: GET
+- **Response**: Displays the top 10 products in JSON array.
+
+
 ### `/top_products_chart`
 
 - **Description**: Displays the top 10 products by total sales.
 - **Method**: GET
-- **Response**: JSON array containing product details (stock code, description, total quantity).
+- **Response**: Displays the top 10 products chart in HTML format.
 
-### `/avg_unit_price_chart`
+
+
+### `/avg_unit_price_chart_overtime`
 
 - **Description**: Represents the trend of average unit price over time.
 - **Method**: GET
-- **Response**: JSON array containing product details (stock code, description, average unit price).
+- **Response**: Displays the average unit price chart in HTML format
 
-### `/avg_unit_price_chart.html`
+### `/avg_unit_price`
 
-- **Description**: Displays the average unit price chart in HTML format.
+- **Description**: JSON array containing product details (stock code, description, average unit price)..
 
-### `/avg_unit_price_chart.html`
+### `/avg_unit_price_chart`
 
 - **Description**: Displays the average unit price chart in HTML format.
 

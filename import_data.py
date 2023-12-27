@@ -20,6 +20,9 @@ xlsx_file_name = "retail.xlsx"
 csv_file_name = "retail.csv"
 
 def download_and_extract_zip(url, extract_to='.'):
+    if os.path.isfile("retail.csv"):
+        print(f"File is already downloaded.")
+        return True
     # Download the ZIP file
     response = requests.get(url)
 

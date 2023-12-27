@@ -2,7 +2,7 @@ import os
 
 # class Config:
 #     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI')
-#     SQLALCHEMY_TRACK_MODIFICATIONS = False
+#     SQLALCHEMY_TRACK_MODIFICATIONS = Falsels
 
 
 # Access the environment variables

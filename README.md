@@ -40,6 +40,40 @@ This application includes SQL analytics, data processing with Python, web report
     DB_NAME=<your-database-name>
     ```
 
+## Setting Up Database and Importing Data
+
+### Create Table Schema
+To begin, create a table named `transactions` using the following SQL command in your preferred SQL query tool:
+
+```sql
+CREATE TABLE transactions (
+    InvoiceNo VARCHAR(10),
+    StockCode VARCHAR(255),
+    Description VARCHAR(255),
+    Quantity INTEGER,
+    InvoiceDate TIMESTAMP,
+    UnitPrice NUMERIC(10, 2),
+    CustomerID INTEGER,
+    Country VARCHAR(50)
+);
+
+```
+
+Use the following command to copy the data from your CSV file into the transactions table. Adjust the file path as needed:
+Please note: To copy data into the table, ensure your data is in CSV format. Convert a ".xlsx" file into a CSV file before using the \COPY command.
+
+```
+\COPY transactions FROM 'path/to/csv file' DELIMITER ',' CSV HEADER;
+
+```
+Add Primary Key
+To add a primary key named id to the transactions table, execute the following SQL command:
+```
+ALTER TABLE transactions
+ADD COLUMN id SERIAL PRIMARY KEY;
+
+```
+
 4. Start the application:
     ```bash
     python app.py
@@ -78,7 +112,7 @@ This application includes SQL analytics, data processing with Python, web report
 
 The project includes unit tests for the APIs. To run the tests, use the following command:
 ```bash
-python -m unittest tests
+pytest tests.py
 ```
 
 ## Dockerization

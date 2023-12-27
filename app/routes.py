@@ -65,6 +65,12 @@ def average_unit_price_per_product():
 
     return jsonify(result)
 
+@transactions_bp.route('/', methods=['GET'])
+def index():
+    """
+    home page
+    """
+    return render_template('index.html')
 
 
 @transactions_bp.route('/top_products_chart', methods=['GET'])

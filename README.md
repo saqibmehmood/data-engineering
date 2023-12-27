@@ -23,13 +23,6 @@ This application includes SQL analytics, data processing with Python, web report
     cd data-engineering
     ```
 
-2. Set up a virtual environment and install dependencies:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # for Linux/Mac
-    venv\Scripts\activate  # for Windows
-    pip install -r requirements.txt
-    ```
 
 3. Create a `.env` file in the root directory and add the necessary environment variables:
     ```bash
@@ -39,6 +32,28 @@ This application includes SQL analytics, data processing with Python, web report
     DB_PORT=<your-port>
     DB_NAME=<your-database-name>
     ```
+## Dockerization
+
+This application can be containerized using Docker. Use the `Dockerfile` and `docker-compose.yml` provided.
+
+---
+
+To run this project by docker simple run the below given command in project root direcotory where Dockerfile and docker-compose.yml files are present.
+```
+docker-compose up -d
+or 
+docker-compose up --build
+```
+If you need to run the project manually(without docker) you can follow the below given steps
+    
+2. Set up a virtual environment and install dependencies:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # for Linux/Mac
+    venv\Scripts\activate  # for Windows
+    pip install -r requirements.txt
+    ```
+
 
 ## Setting Up Database and Importing Data
 
@@ -115,17 +130,6 @@ The project includes unit tests for the APIs. To run the tests, use the followin
 pytest tests.py
 ```
 
-## Dockerization
 
-This application can be containerized using Docker. Use the `Dockerfile` and `docker-compose.yml` provided.
-
----
-
-## .env Configuration
-
-For configuring environment variables, copy the `.env.example` file and modify the values as needed:
-
-```bash
-cp .env.example .env
 
 

@@ -24,7 +24,7 @@ This application includes SQL analytics, data processing with Python, web report
     ```
 
 
-3. Create a `.env` file in the root directory and add the necessary environment variables:
+2. Create a `.env` file in the root directory and add the necessary environment variables:
     ```bash
     DB_USERNAME=<your-username>
     DB_PASSWORD=<your-password>
@@ -38,7 +38,16 @@ This application can be containerized using Docker. Use the `Dockerfile` and `do
 
 ---
 
-To run this project by docker simple run the below given command in project root direcotory where Dockerfile and docker-compose.yml files are present.
+To execute this project via Docker, simply run the command provided below in the project's root directory where the Dockerfile and docker-compose.yml files reside. Upon running these commands, the following tasks will be performed:
+
+Setting up the Flask app and the database.
+Creation of necessary tables in the database.
+Downloading the online retail dataset.
+Conversion of the downloaded file into CSV using a script (to facilitate data copying to the table).
+Copying data from the CSV file into the table.
+
+
+Please Note: The file size is fairly large, so please wait a little bit in order to download, convert, and copy the file data to the table.
 ```
 docker-compose up -d
 or 
@@ -46,7 +55,7 @@ docker-compose up --build
 ```
 If you need to run the project manually(without docker) you can follow the below given steps
     
-2. Set up a virtual environment and install dependencies:
+3. Set up a virtual environment and install dependencies:
     ```bash
     python -m venv venv
     source venv/bin/activate  # for Linux/Mac

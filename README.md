@@ -24,24 +24,27 @@ This application includes SQL analytics, data processing with Python, web report
     DB_PORT=<your-port>
     DB_NAME=<your-database-name>
     ```
-## Dockerization
+## Run with Docker (Recommended)
 ---
 
 To execute this project via Docker, simply run the command provided below in the project's root directory where the Dockerfile and docker-compose.yml files reside. Upon running these commands, the following tasks will be performed:
 
-Setting up the Flask app and the database.
-Creation of necessary tables in the database.
-Downloading the online retail dataset.
-Conversion of the downloaded file into CSV using a script (to facilitate data copying to the table).
-Copying data from the CSV file into the table.
+* Setting up the Flask app and the database.
+* Creation of necessary tables in the database.
+* Downloading the online retail dataset.
+* Conversion of the downloaded file into CSV using a script (to facilitate data copying to the table).
+* Copying data from the CSV file into the table.
 
 
-Please Note: The file size is fairly large, so please wait a little bit in order to download, convert, and copy the file data to the table.
+----------------
+The file size is fairly large, so please wait a little bit in order to download, convert, and copy the file data to the table in the DB container.
+----------------
+
 ```
 docker-compose up -d
 ```
 
-## if you need to run the project Without Dockerizing it 
+## Run without Docker
 If you need to run the project manually(without docker) you can follow the below given steps
     
 1. Set up a virtual environment and install dependencies:
@@ -53,9 +56,9 @@ If you need to run the project manually(without docker) you can follow the below
     ```
 
 
-## Setting Up Database and Importing Data
+### Setting Up Database and Importing Data
 
-### Create Table Schema
+#### Create Table Schema
 To begin, create a table named `transactions` using the following SQL command in your preferred SQL query tool:
 
 ```sql
@@ -93,22 +96,21 @@ ADD COLUMN id SERIAL PRIMARY KEY;
     ```
 
 
+## Urls
 
-## Endpoints
-
-### `/`
+### `http://127.0.0.1:5000`
 - **Description**: Home page containing the links of graphs.
 - **Method**: GET
 
 
-### `/total_sales`
+### `http://127.0.0.1:5000/total_sales`
 
 - **Description**: Displays the top 10 products by total sales.
 - **Method**: GET
 - **Response**: Displays the top 10 products in JSON array.
 
 
-### `/top_products_chart`
+### `http://127.0.0.1:5000/top_products_chart`
 
 - **Description**: Displays the top 10 products by total sales.
 - **Method**: GET
@@ -116,17 +118,17 @@ ADD COLUMN id SERIAL PRIMARY KEY;
 
 
 
-### `/avg_unit_price_chart_overtime`
+### `http://127.0.0.1:5000/avg_unit_price_chart_overtime`
 
 - **Description**: Represents the trend of average unit price over time.
 - **Method**: GET
 - **Response**: Displays the average unit price chart in HTML format
 
-### `/avg_unit_price`
+### `http://127.0.0.1:5000/avg_unit_price`
 
 - **Description**: JSON array containing product details (stock code, description, average unit price)..
 
-### `/avg_unit_price_chart`
+### `http://127.0.0.1:5000/avg_unit_price_chart`
 
 - **Description**: Displays the average unit price chart in HTML format.
 
@@ -134,11 +136,7 @@ ADD COLUMN id SERIAL PRIMARY KEY;
 
 ## Testing
 
-The project includes unit tests for the APIs. To run the tests, use the following command:
+The project includes unit tests for the APIs. To run the tests, use the following command inside the virtualenv with the database set up, or inside the container:
 ```bash
 pytest tests.py
 ```
-
-
-
-

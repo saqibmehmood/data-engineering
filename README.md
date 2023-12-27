@@ -40,6 +40,8 @@ Please Note: The file size is fairly large, so please wait a little bit in order
 ```
 docker-compose up -d
 ```
+
+## if you need to run the project Without Dockerizing it 
 If you need to run the project manually(without docker) you can follow the below given steps
     
 1. Set up a virtual environment and install dependencies:

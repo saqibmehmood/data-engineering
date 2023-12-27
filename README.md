@@ -16,16 +16,7 @@ This application includes SQL analytics, data processing with Python, web report
 - Flask-SQLAlchemy
 - Pytest
 
-## Installation
-
-1. Clone the repository:
-    ```bash
-    git clone <repository-url>
-    cd data-engineering
-    ```
-
-
-2. Update the `.env` file with required configurations:
+1. Update the `.env` file with required configurations:
     ```bash
     DB_USERNAME=<your-username>
     DB_PASSWORD=<your-password>
@@ -34,9 +25,6 @@ This application includes SQL analytics, data processing with Python, web report
     DB_NAME=<your-database-name>
     ```
 ## Dockerization
-
-This application can be containerized using Docker. Use the `Dockerfile` and `docker-compose.yml` provided.
-
 ---
 
 To execute this project via Docker, simply run the command provided below in the project's root directory where the Dockerfile and docker-compose.yml files reside. Upon running these commands, the following tasks will be performed:
@@ -51,8 +39,6 @@ Copying data from the CSV file into the table.
 Please Note: The file size is fairly large, so please wait a little bit in order to download, convert, and copy the file data to the table.
 ```
 docker-compose up -d
-or 
-docker-compose up --build
 ```
 If you need to run the project manually(without docker) you can follow the below given steps
     
